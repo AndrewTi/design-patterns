@@ -4,20 +4,29 @@
  * In the event of an object already exist just have to return reference to that object (not create new)
  */
 
-let instance = null;
 
-class Singletone {
-    constructor() {
-        if(!instance)
-            this.instance = this;
+ // Basic example of singletone pattern;
+ (() => {
+    console.log('start basic singletone');
+    let instance = null;
 
-        this.data = +new Date();
-        return instance;
-    }   
-}
+    class Singletone {
+        constructor() {
+            if(instance)
+                return instance
 
-instance = new Singletone();
-console.log(instance);
+            this.date = +new Date();
+            return instance;
+        }  
+    }
 
-instance = new Singletone();
-console.log(instance);
+    instance = new Singletone();
+    console.log(instance);
+
+    setTimeout(() => {
+        instance = new Singletone();
+        console.log(instance);
+
+        console.log('end basic singletone');
+    }, 100)
+ })();
