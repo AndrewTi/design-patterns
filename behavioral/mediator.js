@@ -14,13 +14,12 @@
      }
 
      send(text, from, to) {
-         if(!to)
-            this.objects.
-         console.log(text, from.name, to.name);
-     }
-
-     recieve(text, from) {
-         console.log(text, from);
+        if(!to)
+            this.objects.map(function(obj) {
+                obj.recieve(text, from)
+            })
+        else 
+            to.recieve(text, from)
      }
 }
 
@@ -32,6 +31,10 @@ class Controller {
 
     send(text, to = null) {
         this.mediator.send(text, this, to);
+    }
+
+    recieve(text, from) {
+        console.log(text, from.name);
     }
 }
 
@@ -45,4 +48,4 @@ mediator.register(Login);
 mediator.register(Register);
 mediator.register(MainPage);
 
-Login.send('text message', Register);
+Login.send('text message');
