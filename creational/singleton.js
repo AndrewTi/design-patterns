@@ -16,8 +16,8 @@
                 return instance
 
             this.date = +new Date();
-            return instance;
-        }  
+            return this;
+        }
     }
 
     instance = new Singletone();
