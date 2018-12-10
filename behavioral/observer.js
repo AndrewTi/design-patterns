@@ -12,6 +12,10 @@ class Observer {
         this._index = Symbol('index');
     }
 
+    /**
+     * 
+     * @param {object} subscriber 
+     */
     subscribe(subscriber) {
         subscriber[this._index] = this.getCount;
         
@@ -23,7 +27,7 @@ class Observer {
      * @param {object} subscriber 
      */
     unsibscribe(subscriber) {
-        this.subscribers.splice(subscriber[this._index], 1);
+        return this.subscribers.splice(subscriber[this._index], 1);
     }
 
     get getCount() {
@@ -51,10 +55,14 @@ class EventObjectObserver extends Observer {
     /**
      * @param {object} obj
      * @param {function} func
+     * 
+     * @returns {object} 
      */
     add(obj, func) {
         obj[this._update] = func;
         this.subscribe(obj);
+
+        return obj;
     }
 
     /**
